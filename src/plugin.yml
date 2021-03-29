@@ -1,0 +1,18 @@
+name: Teams
+version: 0.0.1
+author: Aleksi Lassila
+main: me.aleksilassila.teams.Teams
+api-version: 1.15
+commands:
+  teams:
+    description: Teams management
+    usage: /<command>
+    aliases: [t]
+
+permissions:
+  teams.moderate:
+    description: Moderate teams
+    default: "op"
+  teams.lead:
+    description: Add or remove members to your team
+    default: "op"
