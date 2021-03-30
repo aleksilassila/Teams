@@ -40,7 +40,7 @@ public class InfoSubcommand extends Subcommand {
 
     @Override
     public List<String> onTabComplete(Player player, String[] args) {
-        return null;
+        return getAllTeams();
     }
 
     @Override

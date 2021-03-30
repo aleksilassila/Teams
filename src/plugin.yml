@@ -4,7 +4,7 @@ author: Aleksi Lassila
 main: me.aleksilassila.teams.Teams
 api-version: 1.15
 commands:
-  teams:
+  team:
     description: Teams management
     usage: /<command>
     aliases: [t]

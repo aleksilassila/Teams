@@ -77,7 +77,7 @@ public class Config {
     }
 
     public static void destroyTeam(String name) {
-        teams.put(name, null);
+        teams.remove(name);
         getConfig().set(name, null);
     }
 

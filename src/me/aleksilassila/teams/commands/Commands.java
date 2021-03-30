@@ -1,8 +1,11 @@
 package me.aleksilassila.teams.commands;
 
+import me.aleksilassila.teams.Config;
+import me.aleksilassila.teams.Team;
 import me.aleksilassila.teams.Teams;
 import me.aleksilassila.teams.commands.subcommands.*;
 import me.aleksilassila.teams.utils.Messages;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -14,7 +17,7 @@ public class Commands implements TabExecutor {
     public final Set<Subcommand> subcommands;
 
     public Commands() {
-        Teams.instance.getCommand("teams").setExecutor(this);
+        Teams.instance.getCommand("team").setExecutor(this);
 
         subcommands = new HashSet<>();
 
@@ -63,6 +66,21 @@ public class Commands implements TabExecutor {
         }
 
         player.sendMessage(Messages.get("VERSION_INFO", Teams.instance.getDescription().getVersion()));
+        Team team = Config.getPlayerTeam(player);
+
+        if (team != null) {
+            Messages.send(player, "MY_TEAM", team.name);
+
+            for (UUID member : team.members) {
+                String name = Bukkit.getOfflinePlayer(member).getName();
+
+                if (name != null) {
+                    if (team.leader == member)
+                        Messages.send(player, "TEAM_LEADER", name);
+                    else Messages.send(player, "TEAM_MEMBER", name);
+                }
+            }
+        }
 
         return true;
     }

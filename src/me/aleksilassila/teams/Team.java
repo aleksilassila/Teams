@@ -53,7 +53,9 @@ public class Team {
     }
 
     public void updateLeader() {
-        leader = members.get(0);
-        changed = true;
+        if (members.size() != 0) {
+            leader = members.get(0);
+            changed = true;
+        }
     }
 }
