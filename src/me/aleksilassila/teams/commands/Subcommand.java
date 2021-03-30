@@ -12,24 +12,8 @@ import java.util.List;
 import java.util.UUID;
 
 public abstract class Subcommand {
-    public abstract void onCommand(Player player, String[] args, Team team, Player target);
+    public abstract void onCommand(Player player, String[] args);
 
-    void run(Player player, String[] args) {
-        if (!hasTargetPlayer())
-            onCommand(player, args, Config.getPlayerTeam(player), null);
-        else if (hasTargetPlayer() && args.length == 0) {
-            Messages.send(player, "REQUIRES_TARGET_PLAYER");
-        } else {
-            Player target = Teams.instance.getServer().getPlayer(args[0]);
-            if (target == null)
-                Messages.send(player, "PLAYER_NOT_FOUND");
-            else
-                onCommand(player, args, Config.getPlayerTeam(player), target);
-        }
-
-    }
-
-    public abstract boolean hasTargetPlayer();
     public abstract List<String> onTabComplete(Player player, String[] args);
     public abstract String getName();
     public abstract String help();
@@ -61,5 +45,37 @@ public abstract class Subcommand {
 
     protected List<String> getAllTeams() {
         return new ArrayList<>(Config.teams.keySet());
+    }
+
+    // TeamSubcommand requires you to be a team leader and a target player as an argument.
+    public static abstract class LeaderSubcommand extends Subcommand {
+        public abstract void onCommand(Player player, String[] args, Team team, Player target);
+
+        @Override
+        public void onCommand(Player player, String[] args) {
+            Team team = Config.getPlayerTeam(player);
+            if (team == null) {
+                Messages.send(player, "MEMBERSHIP_REQUIRED");
+                return;
+            }
+            if (!team.leader.equals(player.getUniqueId())) {
+                Messages.send(player, "NOT_LEADER");
+                return;
+            }
+
+            if (args.length == 0) {
+                Messages.send(player, "REQUIRES_TARGET_PLAYER");
+            } else {
+                Player target = Teams.instance.getServer().getPlayer(args[0]);
+                if (target == null)
+                    Messages.send(player, "PLAYER_NOT_FOUND");
+                else if (player.getUniqueId().equals(target.getUniqueId()))
+                    Messages.send(player, "CANNOT_PERFORM_ON_SELF");
+                else
+                    onCommand(player, args, team, target);
+            }
+
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 package me.aleksilassila.teams.commands.subcommands;
 
 import me.aleksilassila.teams.Config;
+import me.aleksilassila.teams.Team;
 import me.aleksilassila.teams.commands.Subcommand;
 import me.aleksilassila.teams.utils.Messages;
 import me.aleksilassila.teams.utils.Permissions;
@@ -8,28 +9,21 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class CreateSubcommand extends Subcommand {
+public class LeaveSubcommand extends Subcommand {
     @Override
     public void onCommand(Player player, String[] args) {
-        if (Config.getPlayerTeam(player) != null) {
-            Messages.send(player, "YOURE_IN_A_TEAM");
+        Team team = Config.getPlayerTeam(player);
+        if (team == null) {
+            Messages.send(player, "MEMBERSHIP_REQUIRED");
             return;
         }
 
-        if (args.length == 0) {
-            Messages.send(player, "TEAM_NAME_REQUIRED");
-            return;
-        }
+        team.remove(player);
 
-        String name = args[0];
+        if (team.leader.equals(player.getUniqueId()))
+            team.updateLeader();
 
-        if (Config.teams.containsKey(name)) {
-            Messages.send(player, "NAME_USED");
-            return;
-        }
-
-        Config.createTeam(name, player);
-        Messages.send(player, "TEAM_CREATED");
+        Messages.send(player, "TEAM_LEFT");
     }
 
     @Override
@@ -39,7 +33,7 @@ public class CreateSubcommand extends Subcommand {
 
     @Override
     public String getName() {
-        return "create";
+        return "leave";
     }
 
     @Override
@@ -49,6 +43,6 @@ public class CreateSubcommand extends Subcommand {
 
     @Override
     public String getPermission() {
-        return Permissions.lead;
+        return Permissions.join;
     }
 }

@@ -9,14 +9,9 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class KickSubcommand extends Subcommand {
+public class KickSubcommand extends Subcommand.LeaderSubcommand {
     @Override
     public void onCommand(Player player, String[] args, Team team, Player target) {
-        if (team.leader != player.getUniqueId()) {
-            Messages.send(player, "NOT_LEADER");
-            return;
-        }
-
         if (!team.members.contains(target.getUniqueId())) {
             Messages.send(player, "NOT_A_MEMBER");
             return;
@@ -24,11 +19,6 @@ public class KickSubcommand extends Subcommand {
 
         team.remove(target);
         Messages.send(player, "MEMBER_KICKED");
-    }
-
-    @Override
-    public boolean hasTargetPlayer() {
-        return true;
     }
 
     @Override

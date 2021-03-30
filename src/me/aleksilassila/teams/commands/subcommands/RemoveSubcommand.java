@@ -5,6 +5,7 @@ import me.aleksilassila.teams.Team;
 import me.aleksilassila.teams.commands.Subcommand;
 import me.aleksilassila.teams.utils.Messages;
 import me.aleksilassila.teams.utils.Permissions;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -12,9 +13,15 @@ import java.util.List;
 public class RemoveSubcommand extends Subcommand {
 
     @Override
-    public void onCommand(Player player, String[] args, Team team, Player target) {
+    public void onCommand(Player player, String[] args) {
         if (args.length != 2) {
             Messages.send(player, "INVALID_ARGUMENTS");
+            return;
+        }
+
+        Player targetPlayer = Bukkit.getPlayer(args[0]);
+        if (targetPlayer == null) {
+            Messages.send(player, "PLAYER_NOT_FOUND");
             return;
         }
 
@@ -25,12 +32,10 @@ public class RemoveSubcommand extends Subcommand {
             return;
         }
 
-        targetTeam.add(target);
-    }
+        targetTeam.remove(targetPlayer);
 
-    @Override
-    public boolean hasTargetPlayer() {
-        return true;
+        if (targetTeam.leader.equals(targetPlayer.getUniqueId()))
+            targetTeam.updateLeader();
     }
 
     @Override

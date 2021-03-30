@@ -9,14 +9,9 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class MakeLeaderSubcommand extends Subcommand {
+public class MakeLeaderSubcommand extends Subcommand.LeaderSubcommand {
     @Override
     public void onCommand(Player player, String[] args, Team team, Player target) {
-        if (!team.members.contains(player.getUniqueId()) || team.leader != player.getUniqueId()) {
-            Messages.send(player, "NOT_LEADER");
-            return;
-        }
-
         if (!team.members.contains(target.getUniqueId())) {
             Messages.send(player, "NOT_A_MEMBER");
             return;
@@ -24,11 +19,6 @@ public class MakeLeaderSubcommand extends Subcommand {
 
         team.makeLeader(target);
         Messages.send(player, "LEADERSHIP_TRANSFERRED");
-    }
-
-    @Override
-    public boolean hasTargetPlayer() {
-        return true;
     }
 
     @Override

@@ -13,9 +13,14 @@ import java.util.UUID;
 
 public class InfoSubcommand extends Subcommand {
     @Override
-    public void onCommand(Player player, String[] args, Team team, Player target) {
+    public void onCommand(Player player, String[] args) {
         if (args.length == 0) {
-            Messages.send(player, "TEAM_NAME_REQUIRED");
+            Messages.send(player, "TEAMS");
+
+            for (Team t : Config.teams.values()) {
+                Messages.send(player, "TEAM", t.name, t.members.size());
+            }
+
             return;
         }
 
@@ -31,11 +36,6 @@ public class InfoSubcommand extends Subcommand {
                 else Messages.send(player, "TEAM_MEMBER", name);
             }
         }
-    }
-
-    @Override
-    public boolean hasTargetPlayer() {
-        return false;
     }
 
     @Override

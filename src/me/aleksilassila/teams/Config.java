@@ -45,9 +45,7 @@ public class Config {
         for (String teamName : getConfig().getKeys(false)) {
             ArrayList<UUID> members = new ArrayList<>();
 
-            for (String uuid : getConfig().getConfigurationSection(teamName + ".members")
-                    .getKeys(false)) {
-
+            for (String uuid : getConfig().getStringList(teamName + ".members")) {
                 try {
                     members.add(UUID.fromString(uuid));
                 } catch (IllegalArgumentException ignored) {
@@ -74,6 +72,8 @@ public class Config {
 
     public static void save() {
         for (Team team : teams.values()) team.saveToDisk();
+
+        saveConfigFile();
     }
 
     public static void destroyTeam(String name) {
@@ -83,7 +83,7 @@ public class Config {
 
     public static void createTeam(String name, Player player) {
         Team team = new Team(name,
-                (ArrayList<UUID>) Collections.singletonList(player.getUniqueId()),
+                new ArrayList<>(Collections.singletonList(player.getUniqueId())),
                 player.getUniqueId());
         teams.put(name, team);
         team.changed = true;
@@ -94,6 +94,15 @@ public class Config {
             return UUID.fromString(uuid);
         } catch (IllegalArgumentException e) {
             return null;
+        }
+    }
+
+    static void saveConfigFile() {
+        try {
+            config.save(configFile);
+        } catch (IOException e) {
+            Teams.instance.getLogger().severe("Unable to save teams.yml");
+            e.printStackTrace();
         }
     }
 }

@@ -1,6 +1,6 @@
 package me.aleksilassila.teams;
 
-import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ public class Team {
     public boolean changed = false;
 
     public Team(String name, ArrayList<UUID> members, UUID leader) {
+        this.name = name;
         this.members = members;
         this.leader = leader;
     }
@@ -31,15 +32,28 @@ public class Team {
     public void remove(Player player) {
         members.remove(player.getUniqueId());
         changed = true;
+
+        if (members.size() == 0)
+            Config.destroyTeam(name);
     }
 
     public void saveToDisk() {
-        ConfigurationSection section = Config.getConfig().getConfigurationSection(name);
+        if (!changed) return;
 
-        section.set("members", members);
-        section.set("name", name);
-        section.set("leader", leader);
+        FileConfiguration config = Config.getConfig();
+        ArrayList<String> members = new ArrayList<>();
+
+        for (UUID m : this.members)
+            members.add(m.toString());
+
+        config.set(name + ".members", members);
+        config.set(name + ".leader", leader.toString());
 
         changed = false;
+    }
+
+    public void updateLeader() {
+        leader = members.get(0);
+        changed = true;
     }
 }

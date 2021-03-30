@@ -1,5 +1,6 @@
 package me.aleksilassila.teams.commands.subcommands;
 
+import me.aleksilassila.teams.Config;
 import me.aleksilassila.teams.Team;
 import me.aleksilassila.teams.Teams;
 import me.aleksilassila.teams.commands.Subcommand;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class AcceptSubcommand extends Subcommand {
     @Override
-    public void onCommand(Player player, String[] args, Team team, Player target) {
+    public void onCommand(Player player, String[] args) {
         Teams.Invitation i = Teams.invitations.get(player.getUniqueId());
 
         if (i == null) {
@@ -26,17 +27,13 @@ public class AcceptSubcommand extends Subcommand {
         }
 
         if (i.team.members.size() < Teams.maxTeamSize) {
+            Team currentTeam = Config.getPlayerTeam(player);
+            if (currentTeam != null) currentTeam.remove(player);
             i.team.add(player);
-            if (team != null) team.remove(player);
             Messages.send(player, "JOINED_TEAM", i.team.name);
         } else {
             Messages.send(player, "TEAM_FULL");
         }
-    }
-
-    @Override
-    public boolean hasTargetPlayer() {
-        return false;
     }
 
     @Override

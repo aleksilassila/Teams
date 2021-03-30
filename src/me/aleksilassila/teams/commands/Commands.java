@@ -26,6 +26,7 @@ public class Commands implements TabExecutor {
         subcommands.add(new CreateSubcommand());
         subcommands.add(new MakeLeaderSubcommand());
         subcommands.add(new AcceptSubcommand());
+        subcommands.add(new LeaveSubcommand());
     }
 
 
@@ -42,7 +43,7 @@ public class Commands implements TabExecutor {
 
             if (target == null) {
                 player.sendMessage(Messages.get("error.SUBCOMMAND_NOT_FOUND"));
-                getSubcommand("help").run(player, new String[0]);
+                getSubcommand("help").onCommand(player, new String[0]);
                 return true;
             }
 
@@ -51,8 +52,9 @@ public class Commands implements TabExecutor {
                 return true;
             }
 
+                target.onCommand(player, Arrays.copyOfRange(args, 1, args.length));
             try {
-                target.run(player, Arrays.copyOfRange(args, 1, args.length));
+
             } catch (Exception e) {
                 player.sendMessage(Messages.get("error.ERROR"));
             }
@@ -60,7 +62,7 @@ public class Commands implements TabExecutor {
             return true;
         }
 
-        player.sendMessage(Messages.get("info.VERSION_INFO", Teams.instance.getDescription().getVersion()));
+        player.sendMessage(Messages.get("VERSION_INFO", Teams.instance.getDescription().getVersion()));
 
         return true;
     }

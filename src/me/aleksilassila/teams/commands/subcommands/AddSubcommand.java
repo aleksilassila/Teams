@@ -5,15 +5,22 @@ import me.aleksilassila.teams.Team;
 import me.aleksilassila.teams.commands.Subcommand;
 import me.aleksilassila.teams.utils.Messages;
 import me.aleksilassila.teams.utils.Permissions;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
 public class AddSubcommand extends Subcommand {
     @Override
-    public void onCommand(Player player, String[] args, Team team, Player target) {
+    public void onCommand(Player player, String[] args) {
         if (args.length != 2) {
             Messages.send(player, "INVALID_ARGUMENTS");
+            return;
+        }
+
+        Player targetPlayer = Bukkit.getPlayer(args[0]);
+        if (targetPlayer == null) {
+            Messages.send(player, "PLAYER_NOT_FOUND");
             return;
         }
 
@@ -24,12 +31,7 @@ public class AddSubcommand extends Subcommand {
             return;
         }
 
-        targetTeam.add(target);
-    }
-
-    @Override
-    public boolean hasTargetPlayer() {
-        return true;
+        targetTeam.add(targetPlayer);
     }
 
     @Override
