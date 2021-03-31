@@ -25,6 +25,7 @@ public class InfoSubcommand extends Subcommand {
         }
 
         Team targetTeam = Config.teams.get(args[0]);
+        targetTeam.setPoints(targetTeam.points + 1);
 
         Messages.send(player, "TEAM_MEMBERS");
         for (UUID member : targetTeam.members) {

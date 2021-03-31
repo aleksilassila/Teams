@@ -1,22 +1,25 @@
 package me.aleksilassila.teams;
 
+import me.aleksilassila.teams.utils.Messages;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 public class Config {
     public static FileConfiguration config;
     private static File configFile;
 
     public static HashMap<String, Team> teams;
+    public static ChatColor[] partyColors = new ChatColor[]{ChatColor.DARK_PURPLE, ChatColor.BLUE,
+            ChatColor.GOLD, ChatColor.RED, ChatColor.DARK_AQUA, ChatColor.GREEN, ChatColor.LIGHT_PURPLE,
+            ChatColor.YELLOW, ChatColor.AQUA, ChatColor.DARK_GREEN};
 
     public static FileConfiguration getConfig() {
         if (config != null) return config;
@@ -55,7 +58,7 @@ public class Config {
 
             UUID leader = parseUUID(getConfig().getString(teamName + ".leader", members.get(0).toString()));
 
-            Team t = new Team(teamName, members, leader);
+            Team t = new Team(teamName, members, leader, getConfig().getInt(teamName + ".points", 0));
             teams.put(teamName, t);
         }
 
@@ -84,9 +87,18 @@ public class Config {
     public static void createTeam(String name, Player player) {
         Team team = new Team(name,
                 new ArrayList<>(Collections.singletonList(player.getUniqueId())),
-                player.getUniqueId());
+                player.getUniqueId(), Teams.instance.getConfig().getInt("startPoints", 0));
         teams.put(name, team);
         team.changed = true;
+    }
+
+    static int i = 0;
+    static void animateScoreboardTitles() {
+        if (i == partyColors.length - 1) i = 0;
+        ChatColor color = partyColors[i++];
+        for (Team t : teams.values()) {
+            t.scoreboard.getObjective(DisplaySlot.SIDEBAR).setDisplayName(color + "" + ChatColor.BOLD + Messages.get("SIDEBAR_TITLE"));
+        }
     }
 
     private static UUID parseUUID(String uuid) {

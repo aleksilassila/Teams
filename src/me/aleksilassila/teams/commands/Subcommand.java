@@ -5,6 +5,7 @@ import me.aleksilassila.teams.Team;
 import me.aleksilassila.teams.Teams;
 import me.aleksilassila.teams.utils.Messages;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public abstract class Subcommand {
 
     // TeamSubcommand requires you to be a team leader and a target player as an argument.
     public static abstract class LeaderSubcommand extends Subcommand {
-        public abstract void onCommand(Player player, String[] args, Team team, Player target);
+        public abstract void onCommand(Player player, String[] args, Team team, OfflinePlayer target);
 
         @Override
         public void onCommand(Player player, String[] args) {
@@ -66,8 +67,11 @@ public abstract class Subcommand {
             if (args.length == 0) {
                 Messages.send(player, "REQUIRES_TARGET_PLAYER");
             } else {
-                Player target = Teams.instance.getServer().getPlayer(args[0]);
-                if (target == null)
+                OfflinePlayer target = canTargetOffline() ?
+                        Bukkit.getServer().getOfflinePlayer(args[0]) :
+                        Bukkit.getServer().getPlayer(args[0]);
+
+                if ((canTargetOffline() && !target.hasPlayedBefore()) || (!canTargetOffline() && target == null))
                     Messages.send(player, "PLAYER_NOT_FOUND");
                 else if (player.getUniqueId().equals(target.getUniqueId()))
                     Messages.send(player, "CANNOT_PERFORM_ON_SELF");
@@ -77,5 +81,6 @@ public abstract class Subcommand {
 
         }
 
+        public abstract boolean canTargetOffline();
     }
 }

@@ -24,6 +24,7 @@ public class LeaveSubcommand extends Subcommand {
             team.updateLeader();
 
         Messages.send(player, "TEAM_LEFT");
+        team.updateScoreboard();
     }
 
     @Override

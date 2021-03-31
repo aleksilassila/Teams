@@ -6,6 +6,7 @@ import me.aleksilassila.teams.commands.Subcommand;
 import me.aleksilassila.teams.utils.Messages;
 import me.aleksilassila.teams.utils.Permissions;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -19,8 +20,8 @@ public class RemoveSubcommand extends Subcommand {
             return;
         }
 
-        Player targetPlayer = Bukkit.getPlayer(args[0]);
-        if (targetPlayer == null) {
+        OfflinePlayer targetPlayer = Bukkit.getOfflinePlayer(args[0]);
+        if (!targetPlayer.hasPlayedBefore()) {
             Messages.send(player, "PLAYER_NOT_FOUND");
             return;
         }
@@ -36,6 +37,7 @@ public class RemoveSubcommand extends Subcommand {
 
         if (targetTeam.leader.equals(targetPlayer.getUniqueId()))
             targetTeam.updateLeader();
+        targetTeam.updateScoreboard();
     }
 
     @Override

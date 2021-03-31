@@ -29,14 +29,19 @@ public class Teams extends JavaPlugin {
 
         if (!(new File(getDataFolder() + "/config.yml").exists()))
             saveDefaultConfig();
-
-        Config.getConfig();
-
         Messages.init();
-
+        Config.getConfig();
         new Commands();
+        getServer().getPluginManager().registerEvents(new Listeners(), this);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, Config::save, 20 * 60 * 5, 20 * 60 * 5);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, Config::animateScoreboardTitles, 0, 30);
+
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            Team t = Config.getPlayerTeam(p);
+            if (t != null)
+                p.setScoreboard(t.scoreboard);
+        }
 
         super.onEnable();
     }

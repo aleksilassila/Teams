@@ -32,6 +32,7 @@ public class AddSubcommand extends Subcommand {
         }
 
         targetTeam.add(targetPlayer);
+        targetTeam.updateScoreboard();
     }
 
     @Override

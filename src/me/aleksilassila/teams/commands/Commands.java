@@ -51,7 +51,7 @@ public class Commands implements TabExecutor {
             }
 
             if (target.getPermission() != null && !player.hasPermission(target.getPermission())) {
-                player.sendMessage(Messages.get("error.NO_PERMISSION"));
+                player.sendMessage(Messages.get("error.zMISSION"));
                 return true;
             }
 
