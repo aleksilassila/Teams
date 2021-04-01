@@ -1,8 +1,6 @@
 package me.aleksilassila.teams.commands.subcommands;
 
-import me.aleksilassila.teams.Config;
 import me.aleksilassila.teams.PlayerScoreboard;
-import me.aleksilassila.teams.Team;
 import me.aleksilassila.teams.Teams;
 import me.aleksilassila.teams.commands.Subcommand;
 import me.aleksilassila.teams.utils.Messages;

@@ -57,6 +57,7 @@ public class PlayerScoreboard {
         labels.add(Messages.get("SIDEBAR_ONLINE", Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
         labels.add("");
 
+        // Team stuff
         if (team != null) {
             labels.add(Messages.get("SIDEBAR_TEAM_NAME", team.name));
 
@@ -69,6 +70,13 @@ public class PlayerScoreboard {
             labels.add(Messages.get("SIDEBAR_POINTS", team.points));
             labels.add(Messages.get("SIDEBAR_POINTS_SELF", team.points));
         }
+
+        // Sponsor
+        labels.add("");
+        labels.add(ChatColor.WHITE + "" + ChatColor.BOLD + "> " + ChatColor.GOLD + "" + ChatColor.BOLD + "MCPR Discord:");
+        labels.add(ChatColor.GOLD + "https://discord.gg/gvqcrzCDd8");
+        labels.add(ChatColor.WHITE + "" + ChatColor.BOLD + "> " + ChatColor.BLUE + "" + ChatColor.BOLD + "Sponsored by: " + ChatColor.BLUE + "JeekieHost");
+        labels.add(ChatColor.DARK_BLUE + "https://discord.gg/rqgYKAZV");
 
         // Convert line breaks
         for (int i = 0; i < labels.size(); i++) {
