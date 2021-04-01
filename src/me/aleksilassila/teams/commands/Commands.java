@@ -30,6 +30,7 @@ public class Commands implements TabExecutor {
         subcommands.add(new MakeLeaderSubcommand());
         subcommands.add(new AcceptSubcommand());
         subcommands.add(new LeaveSubcommand());
+        subcommands.add(new SetGamemodeSubcommand());
     }
 
 
@@ -45,13 +46,13 @@ public class Commands implements TabExecutor {
             Subcommand target = getSubcommand(args[0]);
 
             if (target == null) {
-                player.sendMessage(Messages.get("error.SUBCOMMAND_NOT_FOUND"));
+                Messages.send(player, "SUBCOMMAND_NOT_FOUND");
                 getSubcommand("help").onCommand(player, new String[0]);
                 return true;
             }
 
             if (target.getPermission() != null && !player.hasPermission(target.getPermission())) {
-                player.sendMessage(Messages.get("error.zMISSION"));
+                player.sendMessage(Messages.get("NO_PERMISSION"));
                 return true;
             }
 
@@ -59,7 +60,7 @@ public class Commands implements TabExecutor {
             try {
 
             } catch (Exception e) {
-                player.sendMessage(Messages.get("error.ERROR"));
+                player.sendMessage(Messages.get("ERROR"));
             }
 
             return true;

@@ -45,7 +45,14 @@ public class PlayerScoreboard {
 
         labels.add("");
         labels.add(Messages.get("SIDEBAR_EVENT_STARTS_IN", "Waiting..."));
-        labels.add(Messages.get("SIDEBAR_CURRENT_GAMEMODE", "Unknown"));
+        if (Teams.gamemode != null) {
+            String[] combined = new String[]{Messages.get("SIDEBAR_CURRENT_GAMEMODE"), Messages.get("SIDEBAR_CURRENT_GAMEMODE_VALUE", Teams.gamemode)};
+            if (String.join("", combined).length() > 40) {
+                labels.add(combined[0]);
+                labels.add(combined[1]);
+            } else
+                labels.add(String.join("", combined));
+        }
         labels.add("");
         labels.add(Messages.get("SIDEBAR_ONLINE", Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
         labels.add("");

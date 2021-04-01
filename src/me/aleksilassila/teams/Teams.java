@@ -16,6 +16,8 @@ public class Teams extends JavaPlugin {
     public static int maxTeamSize = 4;
     public static HashMap<UUID, Invitation> invitations = new HashMap<>();
 
+    public static String gamemode;
+
     @Override
     public void onDisable() {
         Config.save();
