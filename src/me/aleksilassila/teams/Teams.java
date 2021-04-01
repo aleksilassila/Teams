@@ -38,9 +38,7 @@ public class Teams extends JavaPlugin {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, Config::animateScoreboardTitles, 0, 30);
 
         for (Player p : Bukkit.getOnlinePlayers()) {
-            Team t = Config.getPlayerTeam(p);
-            if (t != null)
-                p.setScoreboard(t.scoreboard);
+            new PlayerScoreboard(p);
         }
 
         super.onEnable();

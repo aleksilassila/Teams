@@ -6,7 +6,6 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.DisplaySlot;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +38,8 @@ public class Config {
         }
 
         teams = loadTeams();
+
+        for (Team team : teams.values()) team.updateScoreboard();
 
         return config;
     }
@@ -82,6 +83,7 @@ public class Config {
     public static void destroyTeam(String name) {
         teams.remove(name);
         getConfig().set(name, null);
+        Teams.instance.getLogger().info("Team removed: " + name);
     }
 
     public static void createTeam(String name, Player player) {
@@ -90,14 +92,16 @@ public class Config {
                 player.getUniqueId(), Teams.instance.getConfig().getInt("startPoints", 0));
         teams.put(name, team);
         team.changed = true;
+        team.updateScoreboard();
+        Teams.instance.getLogger().info("Team created: " + name);
     }
 
     static int i = 0;
     static void animateScoreboardTitles() {
         if (i == partyColors.length - 1) i = 0;
         ChatColor color = partyColors[i++];
-        for (Team t : teams.values()) {
-            t.scoreboard.getObjective(DisplaySlot.SIDEBAR).setDisplayName(color + "" + ChatColor.BOLD + Messages.get("SIDEBAR_TITLE"));
+        for (PlayerScoreboard board : PlayerScoreboard.scoreboards.values()) {
+            board.objective.setDisplayName(color + "" + ChatColor.BOLD + Messages.get("SIDEBAR_TITLE"));
         }
     }
 

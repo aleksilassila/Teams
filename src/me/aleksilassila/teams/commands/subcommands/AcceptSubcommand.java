@@ -31,7 +31,6 @@ public class AcceptSubcommand extends Subcommand {
             if (currentTeam != null) currentTeam.remove(player);
             i.team.add(player);
             Messages.send(player, "JOINED_TEAM", i.team.name);
-            i.team.updateScoreboard();
         } else {
             Messages.send(player, "TEAM_FULL");
         }

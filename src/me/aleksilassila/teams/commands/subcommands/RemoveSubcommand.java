@@ -1,6 +1,7 @@
 package me.aleksilassila.teams.commands.subcommands;
 
 import me.aleksilassila.teams.Config;
+import me.aleksilassila.teams.PlayerScoreboard;
 import me.aleksilassila.teams.Team;
 import me.aleksilassila.teams.commands.Subcommand;
 import me.aleksilassila.teams.utils.Messages;
@@ -37,7 +38,6 @@ public class RemoveSubcommand extends Subcommand {
 
         if (targetTeam.leader.equals(targetPlayer.getUniqueId()))
             targetTeam.updateLeader();
-        targetTeam.updateScoreboard();
     }
 
     @Override
