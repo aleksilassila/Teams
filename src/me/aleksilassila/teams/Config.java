@@ -101,7 +101,7 @@ public class Config {
         if (i == partyColors.length - 1) i = 0;
         ChatColor color = partyColors[i++];
         for (PlayerScoreboard board : PlayerScoreboard.scoreboards.values()) {
-            board.objective.setDisplayName(color + "" + ChatColor.BOLD + Messages.get("SIDEBAR_TITLE"));
+            board.objective.setDisplayName(color + Messages.get("SIDEBAR_TITLE"));
         }
     }
 

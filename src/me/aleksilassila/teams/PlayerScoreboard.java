@@ -73,8 +73,7 @@ public class PlayerScoreboard {
 
         // Sponsor
         labels.add("");
-        labels.add(ChatColor.WHITE + "" + ChatColor.BOLD + "> " + ChatColor.GOLD + "" + ChatColor.BOLD + "MCPR Discord:");
-        labels.add(ChatColor.GOLD + "https://discord.gg/gvqcrzCDd8");
+        labels.add(ChatColor.WHITE + "" + ChatColor.BOLD + "> " + ChatColor.GOLD + "" + ChatColor.BOLD + "MCPR Discord: " + ChatColor.GOLD + "gvqcrzCDd8");
         labels.add(ChatColor.WHITE + "" + ChatColor.BOLD + "> " + ChatColor.BLUE + "" + ChatColor.BOLD + "Sponsored by: " + ChatColor.BLUE + "JeekieHost");
         labels.add(ChatColor.DARK_BLUE + "https://discord.gg/rqgYKAZV");
 
@@ -89,7 +88,14 @@ public class PlayerScoreboard {
                 labels.set(i, label.toString());
             }
 
-            objective.getScore(label.toString()).setScore(labels.size() - i);
+            if (label.length() <= 40)
+                objective.getScore(label.toString()).setScore(labels.size() - i);
+            else
+                Teams.instance.getLogger().severe("Scoreboard has a line that exceeds 40 character limit: " + label.toString());
+
+            if (labels.size() > 15) {
+                Teams.instance.getLogger().severe("Scoreboard has more than 15 lines");
+            }
         }
     }
 

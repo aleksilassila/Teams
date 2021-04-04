@@ -2,7 +2,6 @@ package me.aleksilassila.teams.commands;
 
 import me.aleksilassila.teams.Config;
 import me.aleksilassila.teams.Team;
-import me.aleksilassila.teams.Teams;
 import me.aleksilassila.teams.utils.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -19,6 +18,10 @@ public abstract class Subcommand {
     public abstract String getName();
     public abstract String help();
     public abstract String getPermission();
+
+    public String[] getAliases() {
+        return new String[]{};
+    }
 
     protected List<String> getAllPlayers() {
         ArrayList<String> players = new ArrayList<>();

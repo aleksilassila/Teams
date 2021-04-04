@@ -31,6 +31,7 @@ public class Commands implements TabExecutor {
         subcommands.add(new AcceptSubcommand());
         subcommands.add(new LeaveSubcommand());
         subcommands.add(new SetGamemodeSubcommand());
+        subcommands.add(new SaySubcommand());
     }
 
 
@@ -93,6 +94,10 @@ public class Commands implements TabExecutor {
 
         for (Subcommand subcommand : subcommands) {
             if (subcommand.getName().equalsIgnoreCase(name)) return subcommand;
+
+            for (String alias : subcommand.getAliases()) {
+                if (alias.equalsIgnoreCase(name)) return subcommand;
+            }
         }
 
         return null;
