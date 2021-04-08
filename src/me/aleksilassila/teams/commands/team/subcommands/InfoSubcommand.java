@@ -1,4 +1,4 @@
-package me.aleksilassila.teams.commands.subcommands;
+package me.aleksilassila.teams.commands.team.subcommands;
 
 import me.aleksilassila.teams.Config;
 import me.aleksilassila.teams.Team;

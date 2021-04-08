@@ -1,4 +1,4 @@
-package me.aleksilassila.teams.commands.subcommands;
+package me.aleksilassila.teams.commands.team.subcommands;
 
 import me.aleksilassila.teams.Config;
 import me.aleksilassila.teams.Team;
@@ -34,11 +34,6 @@ public class AcceptSubcommand extends Subcommand {
         } else {
             Messages.send(player, "TEAM_FULL");
         }
-    }
-
-    @Override
-    public List<String> onTabComplete(Player player, String[] args) {
-        return null;
     }
 
     @Override

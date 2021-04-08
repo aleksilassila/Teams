@@ -1,4 +1,4 @@
-package me.aleksilassila.teams.commands.subcommands;
+package me.aleksilassila.teams.commands.team.subcommands;
 
 import me.aleksilassila.teams.PlayerScoreboard;
 import me.aleksilassila.teams.Teams;
@@ -27,11 +27,6 @@ public class SetGamemodeSubcommand extends Subcommand {
 
         for (Player p : Bukkit.getOnlinePlayers())
             PlayerScoreboard.update(p);
-    }
-
-    @Override
-    public List<String> onTabComplete(Player player, String[] args) {
-        return null;
     }
 
     @Override

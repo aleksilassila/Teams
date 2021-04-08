@@ -14,7 +14,9 @@ import java.util.UUID;
 public abstract class Subcommand {
     public abstract void onCommand(Player player, String[] args);
 
-    public abstract List<String> onTabComplete(Player player, String[] args);
+    public List<String> onTabComplete(Player player, String[] args) {
+        return new ArrayList<>();
+    };
     public abstract String getName();
     public abstract String help();
     public abstract String getPermission();

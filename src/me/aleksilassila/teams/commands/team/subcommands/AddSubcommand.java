@@ -1,19 +1,16 @@
-package me.aleksilassila.teams.commands.subcommands;
+package me.aleksilassila.teams.commands.team.subcommands;
 
 import me.aleksilassila.teams.Config;
-import me.aleksilassila.teams.PlayerScoreboard;
 import me.aleksilassila.teams.Team;
 import me.aleksilassila.teams.commands.Subcommand;
 import me.aleksilassila.teams.utils.Messages;
 import me.aleksilassila.teams.utils.Permissions;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class RemoveSubcommand extends Subcommand {
-
+public class AddSubcommand extends Subcommand {
     @Override
     public void onCommand(Player player, String[] args) {
         if (args.length != 2) {
@@ -21,8 +18,8 @@ public class RemoveSubcommand extends Subcommand {
             return;
         }
 
-        OfflinePlayer targetPlayer = Bukkit.getOfflinePlayer(args[0]);
-        if (!targetPlayer.hasPlayedBefore()) {
+        Player targetPlayer = Bukkit.getPlayer(args[0]);
+        if (targetPlayer == null) {
             Messages.send(player, "PLAYER_NOT_FOUND");
             return;
         }
@@ -34,10 +31,8 @@ public class RemoveSubcommand extends Subcommand {
             return;
         }
 
-        targetTeam.remove(targetPlayer);
-
-        if (targetTeam.leader.equals(targetPlayer.getUniqueId()))
-            targetTeam.updateLeader();
+        targetTeam.add(targetPlayer);
+        targetTeam.updateScoreboard();
     }
 
     @Override
@@ -46,13 +41,12 @@ public class RemoveSubcommand extends Subcommand {
             return getAllPlayers();
         if (args.length == 2)
             return getAllTeams();
-
         return null;
     }
 
     @Override
     public String getName() {
-        return "remove";
+        return "add";
     }
 
     @Override

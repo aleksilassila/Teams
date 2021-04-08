@@ -1,4 +1,4 @@
-package me.aleksilassila.teams.commands.subcommands;
+package me.aleksilassila.teams.commands.team.subcommands;
 
 import me.aleksilassila.teams.Config;
 import me.aleksilassila.teams.PlayerScoreboard;
@@ -25,11 +25,6 @@ public class LeaveSubcommand extends Subcommand {
             team.updateLeader();
 
         Messages.send(player, "TEAM_LEFT");
-    }
-
-    @Override
-    public List<String> onTabComplete(Player player, String[] args) {
-        return null;
     }
 
     @Override

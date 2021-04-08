@@ -1,4 +1,4 @@
-package me.aleksilassila.teams.commands.subcommands;
+package me.aleksilassila.teams.commands.team.subcommands;
 
 import me.aleksilassila.teams.Config;
 import me.aleksilassila.teams.commands.Subcommand;
@@ -30,11 +30,6 @@ public class CreateSubcommand extends Subcommand {
 
         Config.createTeam(name, player);
         Messages.send(player, "TEAM_CREATED");
-    }
-
-    @Override
-    public List<String> onTabComplete(Player player, String[] args) {
-        return null;
     }
 
     @Override

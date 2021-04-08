@@ -1,6 +1,7 @@
 package me.aleksilassila.teams;
 
-import me.aleksilassila.teams.commands.Commands;
+import me.aleksilassila.teams.commands.TeamCommands;
+import me.aleksilassila.teams.commands.VoteCommands;
 import me.aleksilassila.teams.utils.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -18,6 +19,8 @@ public class Teams extends JavaPlugin {
 
     public static String gamemode;
 
+    public static Vote currentVote;
+
     @Override
     public void onDisable() {
         Config.save();
@@ -33,7 +36,8 @@ public class Teams extends JavaPlugin {
             saveDefaultConfig();
         Messages.init();
         Config.getConfig();
-        new Commands();
+        new TeamCommands();
+        new VoteCommands();
         getServer().getPluginManager().registerEvents(new Listeners(), this);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, Config::save, 20 * 60 * 5, 20 * 60 * 5);

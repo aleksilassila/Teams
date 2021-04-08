@@ -3,7 +3,6 @@ package me.aleksilassila.teams.commands;
 import me.aleksilassila.teams.Config;
 import me.aleksilassila.teams.Team;
 import me.aleksilassila.teams.Teams;
-import me.aleksilassila.teams.commands.subcommands.*;
 import me.aleksilassila.teams.utils.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -13,27 +12,20 @@ import org.bukkit.entity.Player;
 
 import java.util.*;
 
-public class Commands implements TabExecutor {
+public abstract class Commands implements TabExecutor {
     public final Set<Subcommand> subcommands;
 
     public Commands() {
-        Teams.instance.getCommand("team").setExecutor(this);
+        Teams.instance.getCommand(getName()).setExecutor(this);
 
         subcommands = new HashSet<>();
 
-        subcommands.add(new InviteSubcommand());
-        subcommands.add(new KickSubcommand());
-        subcommands.add(new RemoveSubcommand());
-        subcommands.add(new AddSubcommand());
-        subcommands.add(new InfoSubcommand());
-        subcommands.add(new CreateSubcommand());
-        subcommands.add(new MakeLeaderSubcommand());
-        subcommands.add(new AcceptSubcommand());
-        subcommands.add(new LeaveSubcommand());
-        subcommands.add(new SetGamemodeSubcommand());
-        subcommands.add(new SaySubcommand());
+        addSubcommands(subcommands);
     }
 
+    public abstract void addSubcommands(Set<Subcommand> subcommands);
+    public abstract String getName();
+    public abstract Subcommand getDefaultCommand();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -48,7 +40,7 @@ public class Commands implements TabExecutor {
 
             if (target == null) {
                 Messages.send(player, "SUBCOMMAND_NOT_FOUND");
-                getSubcommand("help").onCommand(player, new String[0]);
+                getDefaultCommand().onCommand(player, args);
                 return true;
             }
 
@@ -59,7 +51,6 @@ public class Commands implements TabExecutor {
 
                 target.onCommand(player, Arrays.copyOfRange(args, 1, args.length));
             try {
-
             } catch (Exception e) {
                 player.sendMessage(Messages.get("ERROR"));
             }
@@ -93,7 +84,7 @@ public class Commands implements TabExecutor {
         }
 
         for (Subcommand subcommand : subcommands) {
-            if (subcommand.getName().equalsIgnoreCase(name)) return subcommand;
+            if (name.equalsIgnoreCase(subcommand.getName())) return subcommand;
 
             for (String alias : subcommand.getAliases()) {
                 if (alias.equalsIgnoreCase(name)) return subcommand;
@@ -113,8 +104,10 @@ public class Commands implements TabExecutor {
 
         if (args.length == 1) {
             for (Subcommand subcommand : subcommands) {
-                if (subcommand.getPermission() == null || player.hasPermission(subcommand.getPermission()))
-                    availableArgs.add(subcommand.getName());
+                if (subcommand.getPermission() == null || player.hasPermission(subcommand.getPermission())) {
+                    if (subcommand.getName() != null)
+                        availableArgs.add(subcommand.getName());
+                }
             }
         } else if (args.length > 1) {
             Subcommand currentSubcommand = getSubcommand(args[0]);

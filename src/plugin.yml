@@ -8,6 +8,11 @@ commands:
     description: Teams management
     usage: /<command>
     aliases: [t]
+  vote:
+    description: Voting
+    usage: /<command>
+    aliases: [v]
+
 
 permissions:
   teams.moderate:
