@@ -16,7 +16,6 @@ public class TeamCommands extends Commands {
         subcommands.add(new MakeLeaderSubcommand());
         subcommands.add(new AcceptSubcommand());
         subcommands.add(new LeaveSubcommand());
-        subcommands.add(new SetGamemodeSubcommand());
         subcommands.add(new SaySubcommand());
     }
 

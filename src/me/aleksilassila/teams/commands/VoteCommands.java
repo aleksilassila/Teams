@@ -1,7 +1,7 @@
 package me.aleksilassila.teams.commands;
 
-import me.aleksilassila.teams.commands.team.subcommands.RemoveSubcommand;
 import me.aleksilassila.teams.commands.vote.subcommands.FinishSubcommand;
+import me.aleksilassila.teams.commands.vote.subcommands.ResultsSubcommand;
 import me.aleksilassila.teams.commands.vote.subcommands.StartSubcommand;
 import me.aleksilassila.teams.commands.vote.subcommands.VoteSubcommand;
 
@@ -11,7 +11,7 @@ public class VoteCommands extends Commands {
     @Override
     public void addSubcommands(Set<Subcommand> subcommands) {
         subcommands.add(new FinishSubcommand());
-        subcommands.add(new RemoveSubcommand());
+        subcommands.add(new ResultsSubcommand());
         subcommands.add(new StartSubcommand());
     }
 

@@ -31,6 +31,7 @@ public class VoteSubcommand extends Subcommand {
     @Override
     public List<String> onTabComplete(Player player, String[] args) {
         ArrayList<String> numbers = new ArrayList<>();
+        if (Teams.currentVote == null) return numbers;
 
         for (int i = 1; i <= Teams.currentVote.options.size(); i++) {
             numbers.add("" + i);

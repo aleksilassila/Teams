@@ -6,8 +6,6 @@ import me.aleksilassila.teams.utils.Messages;
 import me.aleksilassila.teams.utils.Permissions;
 import org.bukkit.entity.Player;
 
-import java.util.List;
-
 public class ResultsSubcommand extends Subcommand {
     @Override
     public void onCommand(Player player, String[] args) {
@@ -24,7 +22,7 @@ public class ResultsSubcommand extends Subcommand {
 
     @Override
     public String getName() {
-        return null;
+        return "results";
     }
 
     @Override

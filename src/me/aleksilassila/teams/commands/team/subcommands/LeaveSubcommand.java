@@ -1,14 +1,11 @@
 package me.aleksilassila.teams.commands.team.subcommands;
 
 import me.aleksilassila.teams.Config;
-import me.aleksilassila.teams.PlayerScoreboard;
 import me.aleksilassila.teams.Team;
 import me.aleksilassila.teams.commands.Subcommand;
 import me.aleksilassila.teams.utils.Messages;
 import me.aleksilassila.teams.utils.Permissions;
 import org.bukkit.entity.Player;
-
-import java.util.List;
 
 public class LeaveSubcommand extends Subcommand {
     @Override

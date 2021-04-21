@@ -1,5 +1,6 @@
 package me.aleksilassila.teams;
 
+import me.aleksilassila.teams.commands.EventCommands;
 import me.aleksilassila.teams.commands.TeamCommands;
 import me.aleksilassila.teams.commands.VoteCommands;
 import me.aleksilassila.teams.utils.Messages;
@@ -20,6 +21,7 @@ public class Teams extends JavaPlugin {
     public static String gamemode;
 
     public static Vote currentVote;
+    public static Event event;
 
     @Override
     public void onDisable() {
@@ -38,6 +40,7 @@ public class Teams extends JavaPlugin {
         Config.getConfig();
         new TeamCommands();
         new VoteCommands();
+        new EventCommands();
         getServer().getPluginManager().registerEvents(new Listeners(), this);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, Config::save, 20 * 60 * 5, 20 * 60 * 5);

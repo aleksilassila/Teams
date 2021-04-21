@@ -8,8 +8,6 @@ import me.aleksilassila.teams.utils.Messages;
 import me.aleksilassila.teams.utils.Permissions;
 import org.bukkit.entity.Player;
 
-import java.util.List;
-
 public class AcceptSubcommand extends Subcommand {
     @Override
     public void onCommand(Player player, String[] args) {

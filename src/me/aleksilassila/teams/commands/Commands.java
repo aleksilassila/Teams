@@ -39,8 +39,10 @@ public abstract class Commands implements TabExecutor {
             Subcommand target = getSubcommand(args[0]);
 
             if (target == null) {
-                Messages.send(player, "SUBCOMMAND_NOT_FOUND");
-                getDefaultCommand().onCommand(player, args);
+                if (getDefaultCommand() == null)
+                    Messages.send(player, "SUBCOMMAND_NOT_FOUND");
+                else
+                    getDefaultCommand().onCommand(player, args);
                 return true;
             }
 
@@ -109,6 +111,10 @@ public abstract class Commands implements TabExecutor {
                         availableArgs.add(subcommand.getName());
                 }
             }
+            Subcommand def = getDefaultCommand();
+            if (def != null && player.hasPermission(def.getPermission()))
+                availableArgs.addAll(def.onTabComplete(player, args));
+
         } else if (args.length > 1) {
             Subcommand currentSubcommand = getSubcommand(args[0]);
             if (currentSubcommand == null) return null;

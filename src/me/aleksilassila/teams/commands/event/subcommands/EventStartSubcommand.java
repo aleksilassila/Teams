@@ -1,20 +1,21 @@
-package me.aleksilassila.teams.commands.vote.subcommands;
+package me.aleksilassila.teams.commands.event.subcommands;
 
+import me.aleksilassila.teams.Event;
 import me.aleksilassila.teams.Teams;
 import me.aleksilassila.teams.commands.Subcommand;
 import me.aleksilassila.teams.utils.Permissions;
 import org.bukkit.entity.Player;
 
-public class FinishSubcommand extends Subcommand {
+public class EventStartSubcommand extends Subcommand {
     @Override
     public void onCommand(Player player, String[] args) {
-        Teams.currentVote.finish();
-        Teams.currentVote.sendResults(player);
+        Teams.event = new Event();
+        Teams.event.start();
     }
 
     @Override
     public String getName() {
-        return "finish";
+        return "start";
     }
 
     @Override

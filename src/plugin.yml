@@ -12,6 +12,10 @@ commands:
     description: Voting
     usage: /<command>
     aliases: [v]
+  event:
+    description: Event management
+    usage: /<command>
+    aliases: [e]
 
 
 permissions:

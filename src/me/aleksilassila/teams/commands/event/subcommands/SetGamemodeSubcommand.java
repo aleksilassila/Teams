@@ -1,4 +1,4 @@
-package me.aleksilassila.teams.commands.team.subcommands;
+package me.aleksilassila.teams.commands.event.subcommands;
 
 import me.aleksilassila.teams.PlayerScoreboard;
 import me.aleksilassila.teams.Teams;
@@ -7,8 +7,6 @@ import me.aleksilassila.teams.utils.Messages;
 import me.aleksilassila.teams.utils.Permissions;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
-import java.util.List;
 
 public class SetGamemodeSubcommand extends Subcommand {
     @Override
