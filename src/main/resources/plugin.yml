@@ -1,0 +1,34 @@
+name: Teams
+
+version: ${project.version}
+
+authors:
+  - Aleksi Lassila
+  - Fraithor
+
+main: me.aleksilassila.teams.Teams
+
+api-version: 1.15
+
+commands:
+  team:
+    description: Teams management
+    usage: /<command>
+    aliases: [t]
+  vote:
+    description: Voting
+    usage: /<command>
+    aliases: [v]
+  event:
+    description: Event management
+    usage: /<command>
+    aliases: [e]
+
+
+permissions:
+  teams.moderate:
+    description: Moderate teams
+    default: op
+  teams.lead:
+    description: Add or remove members to your team
+    default: op
