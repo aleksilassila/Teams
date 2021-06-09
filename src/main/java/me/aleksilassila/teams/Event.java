@@ -1,10 +1,7 @@
-package me.aleksilassila.teams.Event;
+package me.aleksilassila.teams;
 
-import me.aleksilassila.teams.Util.File.Config;
-import me.aleksilassila.teams.Team;
-import me.aleksilassila.teams.Teams;
-import me.aleksilassila.teams.Util.Vote;
-import me.aleksilassila.teams.Util.Messages;
+import me.aleksilassila.teams.utils.Messages;
+import me.aleksilassila.teams.utils.Vote;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

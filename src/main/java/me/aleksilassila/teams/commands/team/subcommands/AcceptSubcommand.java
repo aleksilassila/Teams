@@ -1,11 +1,11 @@
 package me.aleksilassila.teams.commands.team.subcommands;
 
-import me.aleksilassila.teams.Util.File.Config;
+import me.aleksilassila.teams.Config;
 import me.aleksilassila.teams.Team;
 import me.aleksilassila.teams.Teams;
 import me.aleksilassila.teams.commands.Subcommand;
-import me.aleksilassila.teams.Util.Messages;
-import me.aleksilassila.teams.Util.Permissions.Permissions;
+import me.aleksilassila.teams.utils.Messages;
+import me.aleksilassila.teams.utils.Permissions;
 import org.bukkit.entity.Player;
 
 public class AcceptSubcommand extends Subcommand {

@@ -2,7 +2,7 @@ package me.aleksilassila.teams.commands.vote.subcommands;
 
 import me.aleksilassila.teams.Teams;
 import me.aleksilassila.teams.commands.Subcommand;
-import me.aleksilassila.teams.Util.Permissions.Permissions;
+import me.aleksilassila.teams.utils.Permissions;
 import org.bukkit.entity.Player;
 
 public class FinishSubcommand extends Subcommand {

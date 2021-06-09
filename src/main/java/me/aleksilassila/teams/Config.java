@@ -1,8 +1,6 @@
-package me.aleksilassila.teams.Util.File;
+package me.aleksilassila.teams;
 
-import me.aleksilassila.teams.Team;
-import me.aleksilassila.teams.Teams;
-import me.aleksilassila.teams.Util.Messages;
+import me.aleksilassila.teams.utils.Messages;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;

@@ -1,4 +1,4 @@
-package me.aleksilassila.teams.Util;
+package me.aleksilassila.teams.utils;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

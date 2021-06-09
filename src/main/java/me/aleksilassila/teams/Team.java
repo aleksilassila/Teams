@@ -1,7 +1,5 @@
 package me.aleksilassila.teams;
 
-import me.aleksilassila.teams.Util.File.Config;
-import me.aleksilassila.teams.Util.File.PlayerScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;

@@ -1,9 +1,5 @@
-package me.aleksilassila.teams.Event;
+package me.aleksilassila.teams;
 
-import me.aleksilassila.teams.Util.File.Config;
-import me.aleksilassila.teams.Util.File.PlayerScoreboard;
-import me.aleksilassila.teams.Team;
-import me.aleksilassila.teams.Teams;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

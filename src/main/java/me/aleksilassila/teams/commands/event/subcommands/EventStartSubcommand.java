@@ -1,9 +1,9 @@
 package me.aleksilassila.teams.commands.event.subcommands;
 
-import me.aleksilassila.teams.Event.Event;
+import me.aleksilassila.teams.Event;
 import me.aleksilassila.teams.Teams;
 import me.aleksilassila.teams.commands.Subcommand;
-import me.aleksilassila.teams.Util.Permissions.Permissions;
+import me.aleksilassila.teams.utils.Permissions;
 import org.bukkit.entity.Player;
 
 public class EventStartSubcommand extends Subcommand {

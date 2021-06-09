@@ -1,9 +1,9 @@
 package me.aleksilassila.teams.commands;
 
-import me.aleksilassila.teams.Util.File.Config;
+import me.aleksilassila.teams.Config;
 import me.aleksilassila.teams.Team;
 import me.aleksilassila.teams.Teams;
-import me.aleksilassila.teams.Util.Messages;
+import me.aleksilassila.teams.utils.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

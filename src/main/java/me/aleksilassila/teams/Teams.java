@@ -1,14 +1,10 @@
 package me.aleksilassila.teams;
 
-import me.aleksilassila.teams.Event.Event;
-import me.aleksilassila.teams.Event.Listeners;
 import me.aleksilassila.teams.commands.EventCommands;
 import me.aleksilassila.teams.commands.TeamCommands;
 import me.aleksilassila.teams.commands.VoteCommands;
-import me.aleksilassila.teams.Util.File.Config;
-import me.aleksilassila.teams.Util.Messages;
-import me.aleksilassila.teams.Util.File.PlayerScoreboard;
-import me.aleksilassila.teams.Util.Vote;
+import me.aleksilassila.teams.utils.Messages;
+import me.aleksilassila.teams.utils.Vote;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;

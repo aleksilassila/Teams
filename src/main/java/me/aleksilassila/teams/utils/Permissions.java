@@ -1,4 +1,4 @@
-package me.aleksilassila.teams.Util.Permissions;
+package me.aleksilassila.teams.utils;
 
 public class Permissions {
     public static String moderate = "teams.moderate";
